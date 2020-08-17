@@ -1,4 +1,4 @@
-# isc517-vaadin
+# Practica Web Avanzada - Vaadin
 
 Requirements: 
   - Create Sendgrid account.
