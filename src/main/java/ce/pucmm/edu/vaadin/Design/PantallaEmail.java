@@ -4,6 +4,8 @@ import com.sendgrid.*;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
@@ -16,20 +18,19 @@ import java.io.IOException;
 @SpringComponent
 @UIScope
 public class PantallaEmail extends VerticalLayout {
-    TextField from = new TextField("Para:");
-    TextField subject = new TextField("Asunto:");
-    TextArea body = new TextArea("Cuerpo:");
+    TextField from = new TextField("Receiver:");
+    TextField subject = new TextField("Issue:");
+    TextArea body = new TextArea("Body:");
 
     public PantallaEmail() {
         FormLayout formLayout = new FormLayout();
 
-        H3 header = new H3("Enviar Correo");
+        H3 header = new H3("Send Email");
 
-        Button sendBtn = new Button("Enviar");
-        sendBtn.getElement().setAttribute("theme", "primary");
+        Button sendBtn = new Button("Send");
+        sendBtn.setIcon(new Icon(VaadinIcon.CLOUD_UPLOAD));
 
-        Button cancelBtn = new Button("Cancelar");
-        cancelBtn.getElement().setAttribute("theme", "error");
+        Button cancelBtn = new Button("Cancel");
 
         HorizontalLayout botones = new HorizontalLayout(sendBtn, cancelBtn);
 
