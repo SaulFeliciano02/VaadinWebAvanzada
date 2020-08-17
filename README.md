@@ -1,4 +1,6 @@
-# isc517-vaadin
+# Practica Web Avanzada - Vaadin
 
-Variables de entorno necesarias: 
-  - SENDGRID_API_KEY
+Requirements: 
+  - Create Sendgrid account.
+  - Request API KEY.
+  - Select Email to act as Sender.
