@@ -19,7 +19,6 @@ import com.vaadin.flow.component.button.Button;
 @UIScope
 public class PantallaLogin extends VerticalLayout {
     public PantallaLogin(@Autowired UserService userService) {
-
         TextField email = new TextField("Email");
         PasswordField contrasena = new PasswordField("Contrasena");
         TextField nombres = new TextField("Nombre");
@@ -28,10 +27,17 @@ public class PantallaLogin extends VerticalLayout {
         botonAccion.getElement().setAttribute("theme", "primary");
         HorizontalLayout horizontalLayout;
 
+        H4 titulo = new H4("Agenda ISC");
+        H6 subtitulo = userService.listUsers().isEmpty()
+                ? new H6("Register")
+                : new H6("Login");
+
         if (userService.listUsers().isEmpty()) {
-            horizontalLayout = new HorizontalLayout(nombres, email, contrasena);
+            //horizontalLayout = new HorizontalLayout(nombres, email, contrasena);
+            add(titulo, subtitulo, nombres, email, contrasena, botonAccion);
         } else {
-            horizontalLayout = new HorizontalLayout(email, contrasena);
+            //horizontalLayout = new HorizontalLayout(email, contrasena);
+            add(titulo, subtitulo, email, contrasena, botonAccion);
         }
 
         botonAccion.addClickListener((evento) -> {
@@ -58,12 +64,9 @@ public class PantallaLogin extends VerticalLayout {
             }
         });
 
-        H4 titulo = new H4("C A L E N D A R I O");
-        H6 subtitulo = userService.listUsers().isEmpty()
-                ? new H6("Registre una cuenta para poder entrar!")
-                : new H6("Favor de Loggearse");
-
+        //setAlignItems(Alignment.CENTER);
+        //add(titulo, subtitulo, horizontalLayout, botonAccion);
+        //setHorizontalComponentAlignment(Alignment.CENTER, horizontalLayout);
         setAlignItems(Alignment.CENTER);
-        add(titulo, subtitulo, horizontalLayout, botonAccion);
     }
 }

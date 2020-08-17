@@ -22,25 +22,25 @@ import java.util.Date;
 @UIScope
 public class PantallaEvento extends VerticalLayout {
     DatePicker fecha = new DatePicker();
-    TextField titulo = new TextField("Titulo");
+    TextField titulo = new TextField("Event Title");
 
     public PantallaEvento(@Autowired CalendarEventService calendarEventService) {
         FormLayout formLayout = new FormLayout();
 
-        H3 header = new H3("Agregar Evento");
+        H3 header = new H3("Create Event");
 
-        fecha.setLabel("Selecciona el dia de inicio");
-        fecha.setPlaceholder("Selecciona una fecha");
+        fecha.setLabel("Date");
+        fecha.setPlaceholder("Date");
         fecha.setValue(LocalDate.now());
 
-        Button agregar = new Button("Agregar");
-        agregar.getElement().setAttribute("theme", "primary");
+        Button agregar = new Button("Add");
+        //agregar.getElement().setAttribute("theme", "primary");
 
-        Button editar = new Button("Editar");
-        editar.getElement().setAttribute("theme", "success");
+        Button editar = new Button("Edit");
+        //editar.getElement().setAttribute("theme", "success");
 
         Button cancelar = new Button("Cancelar");
-        cancelar.getElement().setAttribute("theme", "error");
+        cancelar.getStyle().set("color", "red");
 
         HorizontalLayout botones = new HorizontalLayout(agregar, cancelar);
 

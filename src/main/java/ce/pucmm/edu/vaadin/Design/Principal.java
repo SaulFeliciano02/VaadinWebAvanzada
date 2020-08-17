@@ -53,42 +53,27 @@ public class Principal extends VerticalLayout {
             HorizontalLayout layoutBotones = new HorizontalLayout();
             layoutBotones.setSpacing(true);
 
-            Button agregar = new Button("Agregar evento");
-            Button enviarEmail = new Button("Enviar email");
-            Button verUsuario = new Button("Información de usuario");
-            Button CRUD = new Button("CRUD de Gerentes");
-            Button salir = new Button("Salir");
+            Button agregar = new Button("Create Event");
+            Button enviarEmail = new Button("Create Email");
+            Button verUsuario = new Button("User Info");
+            Button CRUD = new Button("Manager Manage");
+            Button salir = new Button("Exit");
 
-            agregar.setIcon(new Icon(VaadinIcon.CALENDAR_CLOCK));
+            agregar.setIcon(new Icon(VaadinIcon.CALENDAR));
             agregar.getElement().setAttribute("theme", "primary");
 
-            enviarEmail.setIcon(new Icon(VaadinIcon.CALENDAR_ENVELOPE));
-            enviarEmail.getElement().setAttribute("theme", "primary");
+            enviarEmail.setIcon(new Icon(VaadinIcon.ENVELOPE));
+            //enviarEmail.getElement().setAttribute("theme", "primary");
 
-            verUsuario.setIcon(new Icon(VaadinIcon.CLIPBOARD_USER));
+            verUsuario.setIcon(new Icon(VaadinIcon.MALE));
 
-            CRUD.setIcon(new Icon(VaadinIcon.FORM));
-            CRUD.getElement().setAttribute("theme", "success");
-
-            salir.setIcon(new Icon(VaadinIcon.SIGN_OUT));
-            salir.getElement().setAttribute("theme", "error");
+            CRUD.setIcon(new Icon(VaadinIcon.LIST_OL));
+            //CRUD.getElement().setAttribute("theme", "success");
 
             configurarBotonPantalla(agregar, pantallaEvento);
             configurarBotonPantalla(enviarEmail, pantallaEmail);
 
-            layoutBotones = new HorizontalLayout(agregar, enviarEmail, verUsuario, CRUD, salir);
-
-            salir.addClickListener((evento) -> {
-                try {
-                    User user = userService.listUsers().get(0);
-                    user.setIsLoggedIn(false);
-                    userService.editUser(user);
-
-                    getUI().get().navigate("");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            });
+            layoutBotones = new HorizontalLayout(agregar, enviarEmail, verUsuario, CRUD);
 
             verUsuario.addClickListener((evento) -> getUI().get().navigate("usuario"));
             CRUD.addClickListener((evento) -> getUI().get().navigate("gerentes"));
@@ -96,8 +81,8 @@ public class Principal extends VerticalLayout {
             calendarEventService.createEvent(
                     1,
                     Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()),
-                    "Practica Vaadin",
-                    CalendarItemTheme.Green
+                    "Dia De Hoy",
+                    CalendarItemTheme.LightRed
             );
 
             calendario.setDataProvider(new CustomDataProvider());
@@ -121,12 +106,11 @@ public class Principal extends VerticalLayout {
                 }
             });
 
-            H4 titulo = new H4("C A L E N D A R I O");
-            H6 subtitulo = new H6("Eventos");
+            H4 titulo = new H4("Agenda ISC");
 
             setAlignItems(Alignment.CENTER);
 
-            add(titulo, subtitulo, layoutBotones, calendario);
+            add(titulo, layoutBotones, calendario);
         }
 
         Button agregar = new Button("Agregar");

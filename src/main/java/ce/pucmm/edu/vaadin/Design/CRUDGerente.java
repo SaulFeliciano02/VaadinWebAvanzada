@@ -5,6 +5,8 @@ import ce.pucmm.edu.vaadin.Services.UserService;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.H6;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.component.button.Button;
@@ -29,9 +31,9 @@ public class CRUDGerente extends VerticalLayout {
     DataProvider<User, Void> dataProvider;
 
     public CRUDGerente(@Autowired UserService userService) {
-        TextField nombre = new TextField("Nombre:");
+        TextField nombre = new TextField("Name:");
         TextField email = new TextField("Email:");
-        PasswordField contrasena = new PasswordField("Contraseña:");
+        PasswordField contrasena = new PasswordField("Password:");
 
         dataProvider = DataProvider.fromCallbacks(
                 query -> {
@@ -45,10 +47,10 @@ public class CRUDGerente extends VerticalLayout {
         Binder<User> binder = new Binder<>();
         Grid<User> tabla = new Grid<>();
 
-        Button agregar = new Button("Salvar");
-        agregar.getElement().setAttribute("theme", "primary");
+        Button agregar = new Button("Save");
+        agregar.setIcon(new Icon(VaadinIcon.CHECK_CIRCLE));
 
-        Button cancelar = new Button("Cancelar");
+        Button cancelar = new Button("Cancel");
         cancelar.getElement().setAttribute("theme", "error");
 
         PantallaAccionesGerente pantallaAccionesGerente = new PantallaAccionesGerente();
@@ -89,28 +91,14 @@ public class CRUDGerente extends VerticalLayout {
             });
 
 
-            H4 titulo = new H4("C A L E N D A R I O");
-            H6 subtitulo = new H6("Eventos");
+            H4 titulo = new H4("Agenda ISC");
 
             HorizontalLayout botones = new HorizontalLayout();
 
-            Button calendario = new Button("Volver al Calendario");
+            Button calendario = new Button("Return");
+            calendario.setIcon(new Icon(VaadinIcon.ARROW_LEFT));
 
-            Button salir = new Button("Salir");
-            salir.getElement().setAttribute("theme", "error");
-
-            botones.add(calendario, salir);
-
-            salir.addClickListener((evento) -> {
-                try {
-                    User usuarioaux = userService.listUsers().get(0);
-                    usuarioaux.setIsLoggedIn(false);
-                    userService.editUser(usuarioaux);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                getUI().get().navigate("");
-            });
+            botones.add(calendario);
 
             calendario.addClickListener((evento) -> getUI().get().navigate("calendario"));
 
@@ -157,7 +145,7 @@ public class CRUDGerente extends VerticalLayout {
             setAlignItems(Alignment.CENTER);
             FormLayout form = new FormLayout(nombre, email, contrasena);
 
-            add(titulo, subtitulo, botones, form, botoneslayout, tabla);
+            add(titulo, botones, form, botoneslayout, tabla);
 
             nombre.setValue("");
             email.setValue("");
