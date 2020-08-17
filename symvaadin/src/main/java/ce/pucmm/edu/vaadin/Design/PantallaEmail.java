@@ -11,7 +11,10 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
 
 @SpringComponent
 @UIScope
@@ -48,8 +51,18 @@ public class PantallaEmail extends VerticalLayout {
             Mail email = new Mail(desdeEmail, asuntoEmail, paraEmail, cuerpoEmail);
 
             //Why is this null, tha heck
-            System.out.println("REEEEEEEEEE"+System.getenv("SENDGRID_API_KEY"));
-            SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY"));
+            File file = new File("SENDGRID_API_KEY.txt");
+            Scanner sc = null;
+            try {
+                sc = new Scanner(file);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            //System.out.println(System.getenv());
+            //System.out.println("REEEEEEEEEE"+System.getenv("SENDGRID_API_KEY"));
+            String value = sc.nextLine();
+            System.out.println(value);
+            SendGrid sg = new SendGrid(value);
             Request request = new Request();
 
             try {
